@@ -1,10 +1,9 @@
 package com.learn.selenium.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import java.util.List;
 
 /**
  * Created by Kebscito on 21/01/2016.
@@ -15,8 +14,8 @@ public class HomePage {
 
     private final String HOME_PAGE = "https://www.wikipedia.org/";
 
-    @FindBy(xpath = "//div[@class='central-featured']//a/strong")
-    private List<WebElement> languageLinks;
+    @FindBy(xpath = "//div[@class='central-featured']")
+    private WebElement languagesContainer;
 
     @FindBy(id = "searchInput")
     private WebElement searchInput;
@@ -33,12 +32,7 @@ public class HomePage {
     }
 
     public void clickLanguage(String language){
-        for (WebElement languageLink : languageLinks) {
-            if(languageLink.getText().equals(language)){
-                languageLink.click();
-                break;
-            }
-        }
+       languagesContainer.findElement(By.linkText(language));
     }
 
     public void searchInputSendKeys(String text){
